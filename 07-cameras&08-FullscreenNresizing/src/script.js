@@ -1,3 +1,5 @@
+//🍊 07 ~ 08. Cameras, Fullscreen and Resizing 
+
 import "./style.css";
 import * as THREE from "three";
 
