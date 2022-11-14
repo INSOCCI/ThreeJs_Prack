@@ -18,25 +18,31 @@ const scene = new THREE.Scene();
 
 // Geometry
 const geometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2);
-  ㄴ> parameters = width, height, depth, wSegments, hSegments, dSegments
-      - segments : subdivision(해당 면이 몇 개의 삼각형으로 나눌지)의 개수. 
-        segrments와 subdivision이 세분화되고 많아질수록 성능 저하 문제 주의! */        
+  ㄴ> parameters = width, height, depth, wSegments, hSegments d,Segments
+      - segments : subdivision(해당 면을 몇 개의 삼각형으로 나눌지)의 개수. 
+        segrments와 subdivision이 세분화되고 점차 나뉠수록 성능 저하 문제 주의! */        
 
-// BufferGeometry
+// Buffer Geometry - (너무 복잡하지 않은) Geometry 직접 만들 수 있음.
 const geometry = new THREE.BufferGeometry();
+
+// 비어있는 Geometry에 꼭짓점을 추가해주기 위해서 js 내장함수인 Float32Array를 활용.
+// 왜? 배열을 인자로 넘겨주게 되느네, 이 배열은 오직 실수만 요소로 가질 수 있고, 배열의 길이도 고정되어 있어서,
+// 요소가 셋식 짝을 위뤄 하나의 vertex의 위치를 이렇게 생성한 배열을 BufferGeometry에 넘겨주기 전에 
+// 우리는 해당 배열을 BufferAttirbute 메소드를 통해서 변환해주면 됌. (첫 번째 인자는 위에서 생성해준 Array이고 두번째 인자는 몇 개의 value들이 모여 하나의 vertex를 구성하는지를 의미)
+
 const positionsArray = new Float32Array([
   1.0, 1.0, 1.0,
   -1.0, 1.0, 1.0,
   -1.0, -1.0, 1.0,
 ]);  // 3개씩 묶은 element(x,y,z)t는 하나의 버텍스를 나타냄.
 
-// BufferAttribute
+// Buffer Attribute
 const positionsAttribute = new THREE.BufferAttribute(positionsArray, 3);
 geometry.setAttribute('position', positionsAttribute);
 
 const material = new THREE.MeshBasicMaterial({
   color: 0xff0000,
-  wireframe: true, // 각 세그먼트를 구분하는 선을 빨간선으로 보여줌 !
+  wireframe: true, // true->각 세그먼트를 구분하는 선을 빨간선으로 보여줌 !
 });
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
