@@ -22,22 +22,30 @@ const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 
-
 /**
  * Debug - gui로 다양한 속성 컨트롤 해보기.
  */
 const gui = new dat.GUI();
 
-gui.add(mesh.position, "y");     
+gui.add(mesh.position, "y");
 // OR gui.add(mesh.position, "y", -3, 3, 0.01); 으로도 작성 가능.
 
 gui.add(mesh.position, "y").min(-3).max(3).step(0.01).name("elevation");
 // name() 메소드를 이용하면 gui 패널에 등장하는 label의 이름을 변경.
 
-gui.add(mesh, 'visible')
-gui.add(material, 'wireframe')
+gui.add(mesh, "visible"); // 머테리얼 숨김 속성
+gui.add(material, "wireframe"); // 와이어프레임 속성
+gui.addColor(material, "color"); // color 변경 속성
 
-
+// GUI를 통해 큐브를 한 바퀴 돌리는 spin 함수를 트리거 해줄 수도 있음.
+const parameters = {
+    color: 0xff0000,
+    spin: () =>
+    {
+        gsap.to(mesh.rotation, { duration: 1, y: mesh.rotation.y + Math.PI * 2 })
+    }
+}
+gui.add(parameters, 'spin')
 
 /**
  * Sizes
