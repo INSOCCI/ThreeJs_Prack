@@ -25,7 +25,7 @@ scene.add(mesh);
 /**
  * Debug - gui로 다양한 속성 컨트롤 해보기.
  */
-const gui = new dat.GUI();
+const gui = new dat.GUI({ width: 1000 }); // 컨트롤러의 width 값 등 설정 가능!
 
 gui.add(mesh.position, "y");
 // OR gui.add(mesh.position, "y", -3, 3, 0.01); 으로도 작성 가능.
@@ -39,13 +39,20 @@ gui.addColor(material, "color"); // color 변경 속성
 
 // GUI를 통해 큐브를 한 바퀴 돌리는 spin 함수를 트리거 해줄 수도 있음.
 const parameters = {
-    color: 0xff0000,
-    spin: () =>
-    {
-        gsap.to(mesh.rotation, { duration: 1, y: mesh.rotation.y + Math.PI * 2 })
-    }
-}
-gui.add(parameters, 'spin')
+  color: 0xff0000,
+  spin: () => {
+    gsap.to(mesh.rotation, { duration: 1, y: mesh.rotation.y + Math.PI * 2 });
+  },
+};
+gui.add(parameters, "spin");
+
+// 단축key이벤트 생성 (lil-gui에서 더이상 제공하지 않아 아래 함수로 지정.)
+window.addEventListener("keydown", (event) => {
+  if (event.key === "h") {
+    if (gui._hidden) gui.show();
+    else gui.hide();
+  }
+});
 
 /**
  * Sizes
