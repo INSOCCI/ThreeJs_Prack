@@ -20,6 +20,11 @@ const scene = new THREE.Scene();
 /**
  * Galaxy
  */
+// 매번 새로 생성해주기 귀찮으니까~
+let geometry = null;
+let material = null;
+let points = null;
+
 const parameters = {}; // 은하의 반지름이나 사이즈, 회전? 매개변수를 담을 객체 생성
 parameters.count = 1000;
 parameters.size = 0.02;
