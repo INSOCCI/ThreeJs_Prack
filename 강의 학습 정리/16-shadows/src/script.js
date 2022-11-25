@@ -144,8 +144,7 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-// Shadow ON
-renderer.shadowMap.enabled = true;
+renderer.shadowMap.enabled = true; // 그림자 맵 ON
 
 /**
  * Animate
