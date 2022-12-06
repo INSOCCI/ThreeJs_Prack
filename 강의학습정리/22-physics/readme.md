@@ -1,8 +1,8 @@
 # 🍎22.Physics(물리)
 
-<br /><br />
+<br />
 
-## Theory
+<h2> Theory </h2>
 
 - Three.js에서 지원하는 RayCaster 등을 이용해서 직접 물리 현상을 구현할 수도 있지만, <br />
   조금 더 사실적인 구현을 위해서는 라이브러리를 사용하는 것도 좋음. -> Cannon.js 사용해볼 예정!<br />
@@ -15,14 +15,16 @@
   <br />
   <br />
 
-## Apply Forces : 힘을 추가하는 함수
+<h2> Apply Forces : 힘을 추가하는 함수 </h2>
+<h4>다양한 Method</h4>
 
-`다양한 method
-`- applyImpluse: 힘 대신 힘에 영향을 주는 속도를 직접 추가하는 함수(not force)
-`- applyLocalForce: 힘을 추가하지만 좌표계의 기준이 Body(힘에서의 0,0,0이 body의 중심이 됨.)
-`- applyLocalImpluse
+* applyImpluse: 힘 대신 힘에 영향을 주는 속도를 직접 추가하는 함수(not force) <br />
+* applyLocalForce: 힘을 추가하지만 좌표계의 기준이 Body(힘에서의 0,0,0이 body의 중심이 됨.) <br />
+* applyLocalImpluse <br />
+<br />
 
-1. Force 추가 
+1. Force 추가
+
 ```javascript
 sphereBody.applyLocalForce(
   new CANNON.Vec3(150, 0, 0),
