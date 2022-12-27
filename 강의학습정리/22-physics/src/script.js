@@ -183,6 +183,33 @@ renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 /**
+ * Utils
+ */
+const createSphere = (radius, position) => {
+  // Three.js mesh
+  const mesh = new THREE.Mesh(
+    new THREE.SphereBufferGeometry(radius, 20, 20),
+    new THREE.MeshStandardMaterial({
+      metalness: 0.3,
+      roughness: 0.4,
+      envMap: environmentMapTexture,
+    }),
+  );
+  mesh.castShadow = true;
+  mesh.getWorldPosition.copy(position);
+  scene.add(mesh);
+
+    // Cannon.js body
+    const shape = new CANNON.Sphere(radius)
+    const body = new CANNON.Body({
+        mass: 1,
+        position: new CANNON.Vec3(0,3, 0),
+        shape: shape
+    })
+
+};
+
+/**
  * Animate
  */
 const clock = new THREE.Clock();
